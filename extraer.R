@@ -38,7 +38,12 @@ process_proyectos <- function(proyectos) {
     df <- parse_proyecto(proy)
     out_df <- bind_rows(out_df, df)
   }
-  out_df %>% filter(!is.na(proyecto))
+  out_df %>%
+    filter(!is.na(proyecto)) %>%
+    mutate_all(str_trim) %>%
+    mutate(
+      nombre = ifelse(nombre == "", NA, nombre)
+    )
 }
 
 df <- process_proyectos(proyectos)

@@ -58,5 +58,22 @@ save(
   file = here::here("codinomes-peru.Rdata")
 )
 
-updated <- glue::glue("Actualizado el {ahora}", ahora = lubridate::now())
+ncodinomes <- df %>%
+  purrr::pluck(2) %>%
+  unique() %>%
+  length()
+
+nreales <- df %>%
+  filter(!is.na(nombre)) %>%
+  purrr::pluck(3) %>%
+  unique() %>%
+  length()
+
+updated <- glue::glue(
+  "Actualizado el {ahora}\nCodinomes = {codinomes}, Nombres reales = {reales} ({pct}%)",
+  ahora = lubridate::now(),
+  codinomes = ncodinomes,
+  reales = nreales,
+  pct = round(100 * reales / codinomes, 1)
+)
 write(updated, file = "ACTUALIZADO.txt")

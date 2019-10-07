@@ -1,1 +1,2 @@
-Actualizado el 2019-10-04 10:43:46
+Actualizado el 2019-10-07 07:45:10
+Codinomes = 74, Nombres reales = 11 (14.9%)
